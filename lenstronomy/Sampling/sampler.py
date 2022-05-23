@@ -100,7 +100,7 @@ class Sampler(object):
 
         time_start = time.time()
 
-        result, [chi2_list, pos_list, vel_list, end_pos] = pso.optimize(n_iterations)
+        result, [chi2_list, pos_list, vel_list] = pso.optimize(n_iterations)
 
         if pool.is_master():
             kwargs_return = self.chain.param.args2kwargs(result)
