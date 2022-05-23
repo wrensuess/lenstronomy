@@ -100,7 +100,7 @@ class Sampler(object):
 
         time_start = time.time()
 
-        result, [chi2_list, pos_list, vel_list] = pso.optimize(n_iterations)
+        result, [chi2_list, pos_list, vel_list, end_pos] = pso.optimize(n_iterations)
 
         if pool.is_master():
             kwargs_return = self.chain.param.args2kwargs(result)
@@ -116,7 +116,7 @@ class Sampler(object):
             time_end = time.time()
             print(time_end - time_start, 'time used for ', print_key)
             print('===================')
-        return result, [chi2_list, pos_list, vel_list]
+        return result, [chi2_list, pos_list, vel_list, end_pos]
 
     def mcmc_emcee(self, n_walkers, n_run, n_burn, mean_start, sigma_start, mpi=False, progress=False, threadCount=1,
                    initpos=None, backup_filename=None, start_from_backup=False):
